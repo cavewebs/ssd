@@ -1,0 +1,61 @@
+.vid-content {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.img-content {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.tabcontent {
+    animation: fadeEffect 1s;
+    /* Fading effect takes 1 second */
+}
+
+
+/* Go from zero to full opacity */
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.media-show {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.videoPlayer {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.social-buttons {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.social-design {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    background: purple;
+    font-size: 25px;
+    color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+}

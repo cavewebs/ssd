@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      Latest Statuses
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content class="has-header">
+  
+  <div class="friend-status">
+
+    <div *ngIf="!androidPermission && statusLoad" style="text-align: center">
+      <button ion-button small (click)="requestPermission()">Enable</button>        
+      <div>*Please give permission. We do not access/share your data.</div>
+    </div>
+
+    <div *ngIf="!statuses.length && androidPermission && statusLoad">
+      <span style="margin-left: 5px">*See status in your whatsapp before downloading</span>
+    </div>
+  </div>
+    
+  <div id="images" class="tabcontent">
+    <ion-grid>
+      <ion-row>
+        <ion-list *ngIf="statuses.length">
+          <ion-col size="3" *ngFor="let item of statuses">    
+            <ion-card>
+              <div *ngIf="item.isFile && item.extension !='mp4'">
+                <img src="{{ item.photoURL }}" alt="image" class="status-data" routerLink="../statusview/{{ item.name }}/{{ item.extension }}" *ngIf="item.extension == 'jpg' || item.extension == 'gif' || item.extension == 'jpeg'" />
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-list>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div id="videos" class="tabcontent">
+    <ion-grid>
+      <ion-row>
+        <ion-list *ngIf="vidStatuses.length">
+          <ion-col size="3" *ngFor="let vidItem of vidStatuses">    
+            <ion-card>
+              <div *ngIf="vidItem.isFile && vidItem.extension=='mp4'">
+                  <img src="{{ vidItem.nativeURLvideo }}" alt="image" class="status-data" 
+                  routerLink="../statusview/{{ vidItem.name }}/{{ vidItem.extension }}" />
+                  <ion-icon name="play" class="play-icon" (click)="setMedia(vidItem.nativeURL, vidItem.name, vidItem.extension)"></ion-icon>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-list>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<div slot="fixed">
+  <ion-tab-bar slot="fixed">
+    <ion-tab-button id="imageTab" (click)="openMedia(events, 'images')" class="tablinks" color="secondary">
+      <ion-label color="secondary">Images</ion-label>
+      <ion-icon name="images" color="secondary"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button  (click)="openMedia(events, 'videos')" class="tablinks" color="secondary">
+      <ion-label color="secondary">Videos</ion-label>
+      <ion-icon name="videocam" color="secondary"></ion-icon>
+      <ion-badge>{{ vidStatuses.length }}</ion-badge>
+    </ion-tab-button>
+  </ion-tab-bar>
+</div>

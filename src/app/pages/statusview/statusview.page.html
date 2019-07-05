@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      View Status
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card>
+		<ion-card-content>
+			<div class="media-show">
+				<img [src]="photoUrl" alt="image" *ngIf="mediaExt == 'jpg' || mediaExt == 'gif'"/>
+				<video controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer" *ngIf="mediaExt == 'mp4'">
+				<source [src]="photoUrl" type="video/mp4" />
+				</video>
+			</div>
+
+			<ion-item>
+				<ion-button fill="outline" slot="end"(click)="shareStory()" (press)="pressEvent($event, 'share')"><ion-icon name="share"></ion-icon> Share </ion-button>
+				<ion-button fill="outline" slot="start"  (click)="downloadStory()" (press)="pressEvent($event, 'download')"><ion-icon name="save"></ion-icon> Save </ion-button>
+
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+  
+</ion-content>

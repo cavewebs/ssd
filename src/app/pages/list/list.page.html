@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      My Saved Items
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content class="has-header">
+  
+  <div class="friend-status">
+
+      <div *ngIf="!androidPermission && statusLoad" style="text-align: center">
+        <button ion-button small (click)="requestPermission()">Enable</button>        
+        <div>*Please give permission. We do not access/share your data.</div>
+      </div>
+
+      <div *ngIf="!statuses.length && androidPermission && statusLoad">
+        <span style="margin-left: 5px">*See status in your whatsapp before downloading</span>
+      </div>
+
+  </div>
+
+    <div id="images" class="img-content">
+      <ion-list *ngIf="statuses.length">
+          <ion-card *ngFor="let item of statuses">
+            <div *ngIf="item.isFile && item.extension != 'mp4'">
+              <img src="{{ item.photoURL }}" alt="image" class="status-data" *ngIf="item.extension == 'jpg' || item.extension == 'gif' || item.extension == 'jpeg'" />
+             <ion-item>
+                <ion-button fill="outline" slot="end" (click)="shareStory(item.nativeURL)" (press)="pressEvent($event, 'share')">
+                  <ion-icon name="share"></ion-icon> 
+                  Share 
+                </ion-button>
+                <ion-button fill="outline" slot="start"  (click)="deleteItem(item.nativeURL)" (press)="pressEvent($event, 'download')" color="danger">
+                    <ion-icon name="delete" color="danger"></ion-icon> 
+                  Delete 
+                </ion-button>
+              </ion-item>
+
+            </div>
+          </ion-card>
+        </ion-list>
+      </div>
+    <div id="videos" class="vid-content">
+      <ion-list *ngIf="vidStatuses.length">
+          <ion-card *ngFor="let vidItem of vidStatuses">
+            <div *ngIf="vidItem.isFile && vidItem.extension=='mp4'">
+                <img src="{{ vidItem.nativeURLvideo }}" alt="image" class="status-data" />
+                <ion-icon name="play" class="play-icon" (click)="setMedia(vidItem.nativeURL, vidItem.name, vidItem.extension)"></ion-icon>
+
+             <ion-item>
+                <ion-button fill="outline" slot="end"(click)="shareStory(vidItem.nativeURL)" (press)="pressEvent($event, 'share')">
+                  <ion-icon name="share"></ion-icon> 
+                  Share 
+                </ion-button>
+                <ion-button fill="outline" slot="start"  (click)="deleteItem(vidItem.nativeURL)" (press)="pressEvent($event, 'download')" color="danger">
+                    <ion-icon name="delete" color="danger"></ion-icon> 
+                  Delete 
+                </ion-button>
+              </ion-item>
+
+            </div>
+          </ion-card>
+      </ion-list>
+    </div>
+
+</ion-content>
+  <div slot="fixed">
+    <ion-tab-bar slot="fixed">
+
+      <ion-tab-button id="imageTab" (click)="openImg()" class="tablinks">
+        <ion-label>Images</ion-label>
+        <ion-icon name="images"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button id="videoTab"  (click)="openVid()" class="tablinks">
+        <ion-label>Videos</ion-label>
+        <ion-icon name="videocam"></ion-icon>
+        <ion-badge>{{ vidStatuses.length }}</ion-badge>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </div>

@@ -1,0 +1,7 @@
+{
+  "name": "ssd",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

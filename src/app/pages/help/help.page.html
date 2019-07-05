@@ -1,0 +1,53 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+    <ion-slide>
+      <img src="assets/img/1.png" class="slide-image" />
+      <h4 class="slide-title" color="secondary">
+        Welcome to
+        <b>Simple Status Downloader</b>
+      </h4>
+      <p>
+        The app
+        Allows you to save and reshare the status of your contacts without asking them to "send for me". <br> Just follow the next steps to see how simple it is
+      </p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/wa.png" class="slide-image" />
+      <h4 class="slide-title">Step 1?</h4>
+      <p>
+        <b>View Status on WhatsApp</b> <br> Only Status that you have view on WhatsApp is available to download or share. So make sure to view the status on your WhatsApp first</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/2.png" class="slide-image" />
+      <h4 class="slide-title">Step 2</h4>
+      <p>
+        <b>Start Simple Status Saver</b> <br> Now you can see your contacts' statuses listed. Click on video to see video statuses </p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/3.png" class="slide-image" />
+      <h4 class="slide-title">Step 3</h4>
+      <p>
+        <b>View Status </b> <br> Click/tap on any status you and you can save to your phone/device or share on your status or many other places. </p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/4.png" class="slide-image" />
+      <h2 class="slide-title">READY?</h2>
+      <ion-button fill="clear" (click)="startApp()">
+        START NOW
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
